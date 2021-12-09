@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Usuarios {% endblock %}
+
+{% block contenido %}
+
+<div class="logout">
+    <a href="{% url 'main' %}"><p>LogOut</p></a>
+</div>
+
+<div class="friends">
+    <a href="{% url 'friends' %}"><p>Vuelve a tus amigos</p></a>
+</div>
+
+<h1>Perfil de: {{ user_id.username }}</h1>
+<h3>Nombre: {{ user_id.name }}</h3>
+
+{% endblock %}

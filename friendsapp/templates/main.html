@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Home {% endblock %}
+
+{% block contenido %}
+
+<form action="/register/" method="post">
+    <div class="container">
+      <h1>Registrate</h1>
+      <p>Por favor rellena todos los campos</p>
+      <hr>
+        
+      {% csrf_token %}
+      <label for="name"><b>Nombre</b></label>
+      <input type="text" placeholder="Nombre" name="name" id="name" required>
+
+      <label for="username"><b>Nombre de Usuario</b></label>
+      <input type="text" placeholder="Nombre de usuario" name="username" id="username" required>
+  
+      <label for="password"><b>Clave</b></label>
+      <input type="password" placeholder="Contraseña" name="password" id="password" required>
+  
+      <label for="conf_password"><b>Repetir Clave</b></label>
+      <input type="password" placeholder="Repetir Contraseña" name="conf_password" id="conf_password" required>
+      <hr>
+
+      <button type="submit" class="registerbtn">Registrarse</button>
+    </div>
+</form>
+
+<form action="/signin/" method="post">
+    <div class="container-login">
+      <h1>Inicia Sesion</h1>
+      <hr>
+        
+      {% csrf_token %}
+      <label for="username"><b>Nombre de Usuario</b></label>
+      <input type="text" placeholder="Nombre de usuario" name="username" id="username" required>
+  
+      <label for="password"><b>Password</b></label>
+      <input type="password" placeholder="Contraseña" name="password" id="password" required>
+      <hr>
+
+      <button type="submit" class="loginbtn">Iniciar Sesion</button>
+    </div>
+</form>
+
+{% endblock %}

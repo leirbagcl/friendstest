@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block titulo %} Amigos {% endblock %}
+
+{% block contenido %}
+<style>
+    table, tr, td, th{
+        border: 2px solid black;
+    }
+</style>
+
+<div class="logout">
+    <a href="{% url 'main' %}"><p>LogOut</p></a>
+</div>
+<h1>Hola, {{ user.username }}</h1>
+<h3>Aca esta tu lista de amigos</h3>
+<table>
+    <tr>
+      <th>Alias</th>
+      <th>Accion</th>
+    </tr>
+    {% for i in friends %}
+    {% if i.connection.id != request.session.personal_id and user in i.friends.all  %}
+        <tr>
+            <td> {{ i.connection.username }} </td>
+            <td>
+                <a href="/user/{{ i.connection.id }}"> Ver Perfil </a>
+                <a href="/user/{{ i.id }}/remove"> Remover Amigo </a>
+            </td>
+        </tr>
+    {% endif %}
+    {% endfor %}
+</table>
+
+<h3>Otros usuarios que no son tus amigos</h3>
+<table>
+    <tr>
+      <th>Amigos</th>
+      <th>Accion</th>
+    </tr>
+    {% for i in friends %}
+    {% if i.connection.id != request.session.personal_id and user not in i.friends.all  %}
+    <tr>
+        <td> <a href="/user/{{ i.connection.id }}"> {{ i.connection.username }} </a>  </td>
+        <td>
+            <a href="/user/{{ i.id }}/add"> Añadir Amigo </a>
+        </td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+</table>
+{% endblock %}
